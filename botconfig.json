@@ -1,0 +1,8 @@
+{
+    "token": "YOUR_BOT_TOKEN",
+    "prefix": "YOUR_BOT_PREFIX",
+    "clientid": "YOUR_BOT_CLIENT_ID",
+    "server": "YOUR_SERVER_INVITE",
+    "owners": "YOUR_ID",
+    "channel-name": "CHANNEL_NAME"
+}
