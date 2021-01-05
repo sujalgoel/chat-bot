@@ -1,23 +1,38 @@
-const botconfig = require("../botconfig.json");
+const guildDB = require("../models/chat");
+const { MessageEmbed } = require("discord.js");
 
 module.exports.run = async (_bot, message) => {
-    if (message.channel.name === `${botconfig["channel-name"]}`) {
-        return
-    }
-    if (!message.member.hasPermission("MANAGE_CHANNELS")) {
-        return message.channel.send("❌ **| You don't have `MANAGE_CHANNELS` permission!**")
-    }
-
-    if (!message.guild.me.hasPermission("MANAGE_CHANNELS")) {
-        return message.channel.send("❌ **| I am lacking permission of `MANAGE_CHANNELS`**")
-    }
-    const channel = message.guild.channels.cache.find(ch => ch.name === `${botconfig["channel-name"]}`)
-    if (!channel) return message.channel.send(`❌ **| There is no channel named \`${botconfig["channel-name"]}\`**`);
-    channel.delete();
-    message.channel.send(`✅ **| Successfully deleted chat bot channel!**`)
+  if (!message.member.hasPermission("MANAGE_CHANNELS")) {
+    const embed1 = new MessageEmbed()
+      .setColor(`#f04947`)
+      .setDescription("❌ **| You are lacking permission of `MANAGE_CHANNELS`**")
+    return message.channel.send(embed1)
+  }
+  if (!message.guild.me.hasPermission("MANAGE_CHANNELS")) {
+    const embed1 = new MessageEmbed()
+      .setColor(`#f04947`)
+      .setDescription("❌ **| I am lacking permission of `MANAGE_CHANNELS`**")
+    return message.channel.send(embed1)
+  }
+  const guild_is_present = await guildDB.findOne({ _id: message.guild.id })
+  if (!guild_is_present) {
+    const embed1 = new MessageEmbed()
+      .setColor(`#f04947`)
+      .setDescription("❌ **| It seems like the chat bot was never used here.**")
+    return message.channel.send(embed1)
+  } else {
+    await guildDB.findOneAndDelete({
+      _id: message.guild.id
+    }).then(_ => {
+      const embed3 = new MessageEmbed()
+        .setColor(`#43b481`)
+        .setDescription(`**✅ | Successfully removed chat bot**`)
+      message.channel.send(embed3)
+    })
+  }
 }
 
 module.exports.help = {
-    name: "delete",
-    aliases: ["del"]
+  name: "delete",
+  aliases: ["del"]
 }

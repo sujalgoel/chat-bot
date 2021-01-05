@@ -1,11 +1,10 @@
-<h1 align="center">Discord Chat-Bot 🤖</h1>
-Chat Bot is a bot built by ImPoStoR#8011 i.e. me, on Discord JS Version 12.4.1 to chat with super amazing bot!
+# Discord Chat-Bot 🤖
+Chat Bot is a bot built by Sujal Goel#0001 i.e. me, on Discord JS to chat!
 
 ## Requirements 
-- Discord.js - 12.4.1
+- Discord.js - 12.5.1
 - Chatcord - 0.0.5
 - fs - 0.0.1-security
-- os - 0.1.1
 - hastebin.js : 1.3.2
 - node-fetch : 2.6.1
 - nodemon : 2.0.6 [for development only]

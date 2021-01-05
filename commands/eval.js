@@ -1,9 +1,6 @@
 const botconfig = require("../botconfig.json");
 
 module.exports.run = (bot, message, args) => {
-  if (message.channel.name === `${botconfig["channel-name"]}`) {
-    return
-  }
   owners = [`${botconfig.owners}`]
   if (!owners.includes(message.author.id)) {
     return;
@@ -26,7 +23,12 @@ module.exports.run = (bot, message, args) => {
   const query = args.join(' ')
   const code = (lang, code) => (`\`\`\`${lang}\n${String(code).slice(0, 1000) + (code.length >= 1000 ? '...' : '')}\n\`\`\``).replace(bot.token, '*'.repeat(bot.token.length))
 
-  if (!query) msg.channel.send('Please write something so I can evaluate!')
+  if (!query) {
+    const embed1 = new MessageEmbed()
+      .setColor(`#f04947`)
+      .setDescription("❌ **| Please give me something for evaluation!**")
+    return message.channel.send(embed1)
+  }
   else {
     try {
       const evald = eval(query)
@@ -57,5 +59,5 @@ module.exports.run = (bot, message, args) => {
 
 module.exports.help = {
   name: "eval",
-  aliases: ["compile"]
+  aliases: ["compile", "ev"]
 }
