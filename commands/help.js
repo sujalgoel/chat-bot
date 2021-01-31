@@ -8,7 +8,7 @@ module.exports.run = async (bot, message) => {
     const embed = new Discord.MessageEmbed()
         .setColor('BLURPLE')
         .setTitle('Commands')
-        .setAuthor('Chat Bot | ImPoStoR#8011', `${bot.user.displayAvatarURL()}`)
+        .setAuthor('Chat Bot | Sujal Goel#0001', `${bot.user.displayAvatarURL()}`)
         .setDescription(`**\`${botconfig.prefix}help     \` | Shows the help menu \n\`${botconfig.prefix}setup    \` | Setup the chat bot! \n\`${botconfig.prefix}delete   \` | Deletes the bot configuration!**`)
         .addField('**Important Links!**',`[Vote](https://discordbots.org/bot/${bot.user.id}/vote) ● [Support Server](${botconfig.server})**`)
         .setTimestamp()
